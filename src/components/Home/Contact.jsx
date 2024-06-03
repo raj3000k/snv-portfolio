@@ -12,7 +12,7 @@ const Contact = () => {
   });
   const [buttonClicked, setButtonClicked] = useState(false);
 
-  const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_FORMSPREE_KEY;
+  const WEB3FORMS_ACCESS_KEY = "d50048b3-30f2-4049-8293-9293a8c2b601";
 
   const handleChange = (e) => {
     setFormData({
