@@ -10,7 +10,7 @@ function Navbar() {
 
   const handleDownload = () => {
 
-    const fileUrl = '../../../public/resume.pdf';
+    const fileUrl = 'https://drive.google.com/file/d/1hZA_1_I7F2b_E0378m6zLSelPogw7-5V/view?usp=sharing'; 
     const fileName = 'RajMotwaniResume';
 
     const link = document.createElement('a');
