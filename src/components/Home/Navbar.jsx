@@ -11,7 +11,7 @@ function Navbar() {
   const handleDownload = () => {
 
     const fileUrl = '../../../public/resume.pdf';
-    const fileName = 'Raj Motwani Resume';
+    const fileName = 'RajMotwaniResume';
 
     const link = document.createElement('a');
     link.href = fileUrl;
