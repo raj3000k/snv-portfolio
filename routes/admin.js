@@ -2,7 +2,21 @@ import express from 'express';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
+import { v2 as cloudinary } from 'cloudinary';
 import protect from '../middleware/auth.js';
+
+// Configure Cloudinary conditionally
+const isCloudinaryConfigured = process.env.CLOUDINARY_CLOUD_NAME && 
+                              process.env.CLOUDINARY_API_KEY && 
+                              process.env.CLOUDINARY_API_SECRET;
+
+if (isCloudinaryConfigured) {
+  cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+  });
+}
 import Profile from '../models/Profile.js';
 import Experience from '../models/Experience.js';
 import Education from '../models/Education.js';
@@ -51,13 +65,32 @@ const upload = multer({
 router.use(protect);
 
 // Upload Endpoint
-router.post('/upload', upload.single('file'), (req, res) => {
+router.post('/upload', upload.single('file'), async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded' });
   }
-  // Return the relative URL path to be stored in the DB
-  const fileUrl = `/uploads/${req.file.filename}`;
-  res.json({ url: fileUrl });
+
+  try {
+    if (isCloudinaryConfigured) {
+      // Upload local temp file to Cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: 'portfolio',
+      });
+      
+      // Clean up the local temp file
+      fs.unlinkSync(req.file.path);
+      
+      // Return the Cloudinary HTTPS secure URL
+      return res.json({ url: result.secure_url });
+    } else {
+      // Fallback to local file serving
+      const fileUrl = `/uploads/${req.file.filename}`;
+      return res.json({ url: fileUrl });
+    }
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    return res.status(500).json({ message: 'Upload failed: ' + error.message });
+  }
 });
 
 // --- PROFILE CRUD ---
