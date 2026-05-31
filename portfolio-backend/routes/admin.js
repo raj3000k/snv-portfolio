@@ -75,6 +75,7 @@ router.post('/upload', upload.single('file'), async (req, res) => {
       // Upload local temp file to Cloudinary
       const result = await cloudinary.uploader.upload(req.file.path, {
         folder: 'portfolio',
+        resource_type: 'auto',
       });
       
       // Clean up the local temp file
