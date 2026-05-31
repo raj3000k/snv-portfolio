@@ -14,7 +14,7 @@ const defaultPortfolio = {
     title: "Software Developer",
     bio: "I'm an enthusiastic geek and a Software Developer with a keen interest in technology and development. Currently, I'm pursuing my B.Tech at NIT Raipur, which allows me to deepen my knowledge and skills in this ever-evolving field.",
     profilePicUrl: ProfilePic,
-    resumeUrl: "https://drive.google.com/file/d/1hZA_1_I7F2b_E0378m6zLSelPogw7-5V/view?usp=sharing",
+    resumeUrl: "https://drive.google.com/file/d/1tFpzya_Wl4v2YQBC_Db6uYnB8DKnh0OK/view?usp=sharing",
     email: "rajmotwani38@gmail.com",
     github: "https://github.com/raj3000k/",
     linkedin: "https://www.linkedin.com/in/raj-motwani-978143204/",
