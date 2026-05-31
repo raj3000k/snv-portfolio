@@ -363,6 +363,20 @@ body{
   margin: 0;
   text-align: left;
 }
+.project-links-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.project-link-simple.live-link {
+  color: #10b981;
+}
+
+.project-link-simple.live-link:hover {
+  color: #047857;
+}
 
 .project-link-simple {
   display: inline-flex;

@@ -21,6 +21,7 @@ const ProjectCard = ({ data }) => {
   const heading = data.title || data.heading;
   const image = data.imageUrl || data.image;
   const github = data.githubUrl || data.github;
+  const liveUrl = data.liveUrl || data.live || data.liveDemoUrl;
 
   const imageSrc = image
     ? (image.startsWith('/uploads') ? `${API_BASE}${image}` : image)
@@ -38,23 +39,44 @@ const ProjectCard = ({ data }) => {
       )}
       <div className="project-info-simple">
         <h3 className="project-name-simple">{heading}</h3>
-        <a href={github} target='_blank' rel="noopener noreferrer" className="project-link-simple">
-          <span>GitHub</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="3"
-            className="link-icon"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M14 5l7 7m0 0l-7 7m7-7H3"
-            ></path>
-          </svg>
-        </a>
+        <div className="project-links-group">
+          {liveUrl && (
+            <a href={liveUrl} target='_blank' rel="noopener noreferrer" className="project-link-simple live-link">
+              <span>Live Link</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="3"
+                className="link-icon"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                ></path>
+              </svg>
+            </a>
+          )}
+          <a href={github} target='_blank' rel="noopener noreferrer" className="project-link-simple">
+            <span>GitHub</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="3"
+              className="link-icon"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              ></path>
+            </svg>
+          </a>
+        </div>
       </div>
     </motion.div>
   )
