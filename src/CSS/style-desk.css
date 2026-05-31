@@ -221,6 +221,8 @@ body{
     margin: 2vw 4vw;
     border-radius: 2vh;
     padding:1vh;
+    width: calc(100% - 8vw);
+    box-sizing: border-box;
 
 }
 .project-name{

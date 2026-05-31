@@ -220,10 +220,12 @@ body{
     margin: 1vh;
     border-radius: 1vh;
     padding:5vw;
+    width: calc(100% - 2vh);
+    box-sizing: border-box;
 }
 .snapshots{
 
-    visibility: hidden;
+    display: none;
 }
 .snapshots img{
 
