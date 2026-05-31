@@ -460,7 +460,7 @@ function AdminDashboard() {
                     <label>Profile Picture</label>
                     <div className="upload-wrapper">
                       {portfolioData.profile.profilePicUrl && (
-                        <img src={`${API_BASE}${portfolioData.profile.profilePicUrl}`} className="preview-thumb" alt="Profile" />
+                        <img src={portfolioData.profile.profilePicUrl.startsWith('http') ? portfolioData.profile.profilePicUrl : `${API_BASE}${portfolioData.profile.profilePicUrl}`} className="preview-thumb" alt="Profile" />
                       )}
                       <div className="upload-btn-wrapper">
                         <button type="button" className="btn-upload">Choose Image</button>
@@ -665,7 +665,7 @@ function AdminDashboard() {
                         <label>Company Logo</label>
                         <div className="upload-wrapper">
                           {expForm.logoUrl && (
-                            <img src={`${API_BASE}${expForm.logoUrl}`} className="preview-thumb" alt="Company logo" />
+                            <img src={expForm.logoUrl.startsWith('http') ? expForm.logoUrl : `${API_BASE}${expForm.logoUrl}`} className="preview-thumb" alt="Company logo" />
                           )}
                           <div className="upload-btn-wrapper">
                             <button type="button" className="btn-upload">Upload Logo</button>
@@ -869,7 +869,7 @@ function AdminDashboard() {
                         <label>Project Screenshot / Image</label>
                         <div className="upload-wrapper">
                           {projForm.imageUrl && (
-                            <img src={`${API_BASE}${projForm.imageUrl}`} className="preview-thumb" alt="Project screenshot" />
+                            <img src={projForm.imageUrl.startsWith('http') ? projForm.imageUrl : `${API_BASE}${projForm.imageUrl}`} className="preview-thumb" alt="Project screenshot" />
                           )}
                           <div className="upload-btn-wrapper">
                             <button type="button" className="btn-upload">Upload Screenshot</button>
@@ -989,7 +989,7 @@ function AdminDashboard() {
                         <label>Award Certificate / Photo</label>
                         <div className="upload-wrapper">
                           {achForm.imageUrl && (
-                            <img src={`${API_BASE}${achForm.imageUrl}`} className="preview-thumb" alt="Achievement photo" />
+                            <img src={achForm.imageUrl.startsWith('http') ? achForm.imageUrl : `${API_BASE}${achForm.imageUrl}`} className="preview-thumb" alt="Achievement photo" />
                           )}
                           <div className="upload-btn-wrapper">
                             <button type="button" className="btn-upload">Upload Photo</button>
