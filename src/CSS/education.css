@@ -1,6 +1,6 @@
 :root {
-  --primary-color: #ffffff;
-  --background-color: #ffffff;
+  --primary-color: #f8fafc;
+  --background-color: #f8fafc;
   --font: sans-serif;
 }
 
@@ -19,7 +19,7 @@
 
 .education-header{
 
-  color:#374497;
+  color:#312e81;
   font-size: 10vh;
   font-weight: 300;
   margin-left:5vw;
@@ -57,7 +57,7 @@
   content: "";
   position: absolute;
   width: 50%;
-  border: solid #28262c;
+  border: solid #cbd5e1;
 }
 
 /* Setting the border of top, bottom, left */
@@ -109,21 +109,25 @@
   font-size: 1vh;
   display: flex;
   flex-direction: column;
-  background: #f9bd4d;
-  color: rgb(251, 251, 251);
-  border-radius: 10px;
-  padding: 2vh 3vh;  
-  
+  background: #ffffff;
+  color: #374151;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  border-radius: 16px;
+  padding: 3vh;  
 }
 
 .time-desc{
-  font-size: 2vh;
-  margin-top: 3vh;
+  font-size: 1.8vh;
+  margin-top: 2vh;
+  font-weight: 500;
+  color: #4f46e5;
 }
 /* Title of thecard */
 .title {
   font-size: 2.2vh;
-  color: rgb(113, 5, 156);
+  font-weight: 700;
+  color: #1e293b;
   position: relative;
 }
 
@@ -133,9 +137,10 @@
   position: absolute;
   width: 10px;
   height: 10px;
-  background: white;
+  background: #6366f1;
   border-radius: 999px;
-  border: 3px solid #28262c;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 0 1px #cbd5e1;
 }
 
 /* text right if the card is even  */
@@ -163,7 +168,7 @@
   }
   .education-header{
 
-      color:#374497;
+      color:#312e81;
       font-size: 5vh;
       margin-top: 10vh;
   }
@@ -180,4 +185,10 @@
   width: 30%; 
   height: 30%; 
   border-radius: 25px;
+}
+.loc {
+  color: #6b7280;
+  font-size: 1.8vh;
+  margin-top: 1vh;
+  font-weight: 500;
 }

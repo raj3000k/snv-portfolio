@@ -6,6 +6,58 @@ import '../CSS/admin.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
+const getDeviconUrl = (skillName) => {
+  const name = skillName.toLowerCase().trim();
+  
+  // Custom mappings for popular tech stacks
+  const customMap = {
+    'c++': 'cplusplus/cplusplus-original',
+    'cpp': 'cplusplus/cplusplus-original',
+    'c': 'c/c-original',
+    'js': 'javascript/javascript-original',
+    'javascript': 'javascript/javascript-original',
+    'ts': 'typescript/typescript-original',
+    'typescript': 'typescript/typescript-original',
+    'react': 'react/react-original',
+    'reactjs': 'react/react-original',
+    'node': 'nodejs/nodejs-original',
+    'nodejs': 'nodejs/nodejs-original',
+    'express': 'express/express-original',
+    'expressjs': 'express/express-original',
+    'mongodb': 'mongodb/mongodb-original',
+    'mongo': 'mongodb/mongodb-original',
+    'html': 'html5/html5-original',
+    'html5': 'html5/html5-original',
+    'css': 'css3/css3-original',
+    'css3': 'css3/css3-original',
+    'python': 'python/python-original',
+    'django': 'django/django-plain',
+    'git': 'git/git-original',
+    'github': 'github/github-original',
+    'flutter': 'flutter/flutter-original',
+    'dart': 'dart/dart-original',
+    'mysql': 'mysql/mysql-original',
+    'postgres': 'postgresql/postgresql-original',
+    'postgresql': 'postgresql/postgresql-original',
+    'sql': 'mysql/mysql-original',
+    'tailwind': 'tailwindcss/tailwindcss-plain',
+    'tailwindcss': 'tailwindcss/tailwindcss-plain',
+    'firebase': 'firebase/firebase-plain',
+    'docker': 'docker/docker-original',
+    'aws': 'amazonwebservices/amazonwebservices-original-wordmark',
+    'java': 'java/java-original',
+    'golang': 'go/go-original',
+    'go': 'go/go-original'
+  };
+
+  if (customMap[name]) {
+    return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${customMap[name]}.svg`;
+  }
+  
+  // Fallback pattern
+  return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${name}/${name}-original.svg`;
+};
+
 function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [token, setToken] = useState(localStorage.getItem('admin_token') || '');
@@ -190,10 +242,11 @@ function AdminDashboard() {
 
   // Skill Handlers
   const handleAddSkill = () => {
-    if (!newSkill.name || !newSkill.logoUrl) {
-      return toast.warning('Please enter skill name and upload logo');
+    if (!newSkill.name) {
+      return toast.warning('Please enter a skill name');
     }
-    const updatedSkills = [...portfolioData.profile.skills, newSkill];
+    const logoUrl = getDeviconUrl(newSkill.name);
+    const updatedSkills = [...portfolioData.profile.skills, { name: newSkill.name.trim(), logoUrl }];
     setPortfolioData({
       ...portfolioData,
       profile: {
@@ -492,35 +545,30 @@ function AdminDashboard() {
                 <div className="panel-header">
                   <h2>Manage Skills</h2>
                 </div>
-                <div className="grid-cols-2" style={{ alignItems: 'flex-end' }}>
-                  <div className="form-group">
-                    <label>Skill Name (e.g. React)</label>
+                <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-end', marginBottom: '20px' }}>
+                  <div className="form-group" style={{ flex: 1, marginBottom: 0 }}>
+                    <label>Skill Name (e.g. React, Python)</label>
                     <input
                       type="text"
                       className="form-control"
+                      placeholder="Enter skill name..."
                       value={newSkill.name}
                       onChange={(e) => setNewSkill({ ...newSkill, name: e.target.value })}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          handleAddSkill();
+                        }
+                      }}
                     />
                   </div>
-                  <div className="form-group">
-                    <label>Skill Icon Image</label>
-                    <div className="upload-wrapper">
-                      {newSkill.logoUrl && (
-                        <img src={`${API_BASE}${newSkill.logoUrl}`} className="preview-thumb" alt="Skill preview" />
-                      )}
-                      <div className="upload-btn-wrapper">
-                        <button type="button" className="btn-upload">Upload Logo</button>
-                        <input type="file" onChange={(e) => handleFileUpload(e.target.files[0], 'logoUrl', 'newSkill')} accept="image/*" />
-                      </div>
-                      <button type="button" className="btn-add" onClick={handleAddSkill} style={{ marginLeft: 'auto' }}>Add Skill</button>
-                    </div>
-                  </div>
+                  <button type="button" className="btn-add" onClick={handleAddSkill} style={{ height: '42px' }}>Add Skill</button>
                 </div>
 
                 <div className="skills-grid">
                   {portfolioData.profile.skills.map((skill, index) => (
                     <div key={index} className="skill-chip">
-                      <img src={`${API_BASE}${skill.logoUrl}`} alt={skill.name} />
+                      <img src={skill.logoUrl && (skill.logoUrl.startsWith('http') ? skill.logoUrl : `${API_BASE}${skill.logoUrl}`)} alt={skill.name} />
                       <span>{skill.name}</span>
                       <button type="button" onClick={() => handleRemoveSkill(index)}>&times;</button>
                     </div>

@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ProjectCard from './ProjectCard'
 import Traffic from '../../assets/images/projects/traffic-pred.png'
 import Ablego from '../../assets/images/projects/ablego.png'
 import Rent from '../../assets/images/projects/rentwheels.png'
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 const containerVariant = {
   hidden: {
@@ -14,20 +16,6 @@ const containerVariant = {
     transition: {
       duration: 1,
       delay: .05,
-    }
-  },
-};
-
-const cardsVariant = {
-  hidden: {
-    opacity: 0,
-  },
-  show: {
-    opacity: 1,
-    transition: {
-      duration: 1,
-      delay: .5,
-      staggerChildren: 0.6
     }
   },
 };
@@ -48,6 +36,8 @@ const headVariant = {
 }
 
 const Projects = ({ projects }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const defaultProjects = [
     {
       heading: "Traffic Prediction System",
@@ -77,6 +67,16 @@ const Projects = ({ projects }) => {
 
   const displayProjects = projects && projects.length > 0 ? projects : defaultProjects;
 
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % displayProjects.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + displayProjects.length) % displayProjects.length);
+  };
+
+  const current = displayProjects[currentIndex];
+
   return (
     <motion.div id='projects'
       variants={containerVariant} 
@@ -91,16 +91,48 @@ const Projects = ({ projects }) => {
       >
         Projects
       </motion.p>
-      <motion.div 
-        variants={cardsVariant}
-        initial='hidden'
-        whileInView='show'
-        className="project-card-container"
-      >
-        {displayProjects.map((data, index) => (
-          <ProjectCard key={data._id || index} data={data} />
-        ))}
-      </motion.div>
+      
+      <div className="projects-carousel" style={{ position: 'relative', width: '90vw', maxWidth: '1100px', margin: '0 auto' }}>
+        {displayProjects.length > 1 && (
+          <>
+            <button className="carousel-control prev" onClick={prevSlide} aria-label="Previous Project" style={{ left: '-60px' }}>
+              <FontAwesomeIcon icon={faChevronLeft} />
+            </button>
+            <button className="carousel-control next" onClick={nextSlide} aria-label="Next Project" style={{ right: '-60px' }}>
+              <FontAwesomeIcon icon={faChevronRight} />
+            </button>
+          </>
+        )}
+
+        <div className="carousel-track" style={{ overflow: 'hidden' }}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -30 }}
+              transition={{ duration: 0.3 }}
+              className="carousel-slide"
+              style={{ width: '100%' }}
+            >
+              <ProjectCard data={current} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {displayProjects.length > 1 && (
+          <div className="carousel-dots" style={{ marginTop: '20px' }}>
+            {displayProjects.map((_, idx) => (
+              <button
+                key={idx}
+                className={`carousel-dot ${idx === currentIndex ? 'active' : ''}`}
+                onClick={() => setCurrentIndex(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </motion.div>
   )
 }

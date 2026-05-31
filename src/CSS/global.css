@@ -36,15 +36,17 @@ body{
 }
 .profile-photo img{
     outline: none;
-    border: none;
-    width: 30vw;
-    transition: 2s;
+    border: 4px solid #ffffff;
+    border-radius: 50%;
+    width: 280px;
+    height: 280px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: transform 2s;
 }
 .profile-photo img:hover{
-    
-    transform:rotateY(360deg);
-    transition: transform 2s, border 1s;
-
+    transform: rotateY(360deg);
 }
 .main-heading{
     font-size: 7vh;
@@ -101,11 +103,15 @@ body{
 
 .cards
 {
-    width:5vh;
-    height:5vh;
-    margin: 4vw;
-    
-
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 
@@ -181,15 +187,27 @@ body{
 
 .achievement-image-wrapper {
   flex: 1;
-  max-width: 320px;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 16 / 10;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
 }
 
 .achievement-image-wrapper img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 1px solid rgb(211, 211, 211);
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  padding: 4px;
 }
 
 .achievement-details {
@@ -287,6 +305,12 @@ body{
   }
   .achievement-image-wrapper {
     max-width: 100%;
+  }
+  .projects-carousel .carousel-control.prev {
+    left: 8px !important;
+  }
+  .projects-carousel .carousel-control.next {
+    right: 8px !important;
   }
 }
 

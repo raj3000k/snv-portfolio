@@ -156,7 +156,7 @@ body{
 
     display: flex;
     flex-wrap: wrap;
-    width:35vw;
+    width: 45vw;
     min-height: 20vh;
     
 }
@@ -166,9 +166,9 @@ body{
     transition: 1s;
 }
 .cards img{
-
-    width:12vh;
-    
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
 }
 .skills-img:hover .cards:not(:hover)
 {
