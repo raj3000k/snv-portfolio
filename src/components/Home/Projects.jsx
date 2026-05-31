@@ -92,13 +92,13 @@ const Projects = ({ projects }) => {
         Projects
       </motion.p>
       
-      <div className="projects-carousel" style={{ position: 'relative', width: '90vw', maxWidth: '1100px', margin: '0 auto', overflow: 'hidden' }}>
+      <div className="projects-carousel">
         {displayProjects.length > 1 && (
           <>
-            <button className="carousel-control prev" onClick={prevSlide} aria-label="Previous Project" style={{ left: '20px' }}>
+            <button className="carousel-control prev" onClick={prevSlide} aria-label="Previous Project">
               <FontAwesomeIcon icon={faChevronLeft} />
             </button>
-            <button className="carousel-control next" onClick={nextSlide} aria-label="Next Project" style={{ right: '20px' }}>
+            <button className="carousel-control next" onClick={nextSlide} aria-label="Next Project">
               <FontAwesomeIcon icon={faChevronRight} />
             </button>
           </>
