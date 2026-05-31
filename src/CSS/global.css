@@ -305,35 +305,94 @@ body{
   }
 }
 
-.projects-carousel {
-  position: relative;
+/* ========================= Simple Project Cards ========================== */
+.project-card-simple {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 24px;
+  margin: 12px auto;
   width: 90vw;
-  max-width: 1100px;
-  margin: 0 auto;
+  max-width: 600px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.project-card-simple:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+  border-color: #cbd5e1;
+}
+
+.project-logo-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  min-height: 480px;
+  flex-shrink: 0;
 }
 
-.projects-carousel .carousel-control.prev {
-  left: 20px;
+.project-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.projects-carousel .carousel-control.next {
-  right: 20px;
+.project-info-simple {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 16px;
+}
+
+.project-name-simple {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+  text-align: left;
+}
+
+.project-link-simple {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #4f46e5;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+
+.project-link-simple:hover {
+  color: #312e81;
+}
+
+.link-icon {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s;
+}
+
+.project-link-simple:hover .link-icon {
+  transform: translateX(3px);
 }
 
 @media (max-width: 1024px) {
-  .projects-carousel {
-    min-height: 520px;
-  }
   .achievement-image-wrapper {
     max-width: 100%;
-  }
-  .projects-carousel .carousel-control.prev {
-    left: 8px !important;
-  }
-  .projects-carousel .carousel-control.next {
-    right: 8px !important;
   }
 }
 
