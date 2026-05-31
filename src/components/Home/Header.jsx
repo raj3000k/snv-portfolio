@@ -1,10 +1,11 @@
-import React from 'react';
-import ProfilePicDefault from '../../assets/images/profilepic.png';
+import React from 'react'
+import ProfilePicDefault from '../../assets/images/profilepic.png'
+import '../../CSS/scroll-icon.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedinIn, faGithub, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { TypeAnimation } from 'react-type-animation';
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion"
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
@@ -18,11 +19,11 @@ const Header = ({ profile }) => {
 
   return (
     <>
-      <motion.div
-        id="home"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+      <motion.div id='home'
+        initial={{ scale: .55 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1, type: "spring", stiffness: 70 }}
+        viewport={{ once: true }}
         className="header-container"
       >
         <div className="profile-photo">
@@ -41,44 +42,36 @@ const Header = ({ profile }) => {
             ]}
             wrapper="h2"
             speed={10}
-            className="main-heading"
+            className='main-heading'
             repeat={Infinity}
-            key={name + title} // Force re-render if updated
+            key={name + title}
           />
-
           <div className="social-links">
             {profile?.github && (
-              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="icon" aria-label="GitHub">
-                <FontAwesomeIcon icon={faGithub} />
+              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="icon">
+                <FontAwesomeIcon className='icon-i' icon={faGithub} />
               </a>
             )}
             {profile?.linkedin && (
-              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="icon" aria-label="LinkedIn">
-                <FontAwesomeIcon icon={faLinkedinIn} />
+              <a href={profile.linkedin} className="icon" target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon className='icon-i' icon={faLinkedinIn} />
               </a>
             )}
             {profile?.twitter && (
-              <a href={profile.twitter} target="_blank" rel="noopener noreferrer" className="icon" aria-label="Twitter">
-                <FontAwesomeIcon icon={faXTwitter} />
+              <a href={profile.twitter} target="_blank" rel="noopener noreferrer" className="icon">
+                <FontAwesomeIcon className='icon-i' icon={faXTwitter} />
               </a>
             )}
             {profile?.email && (
-              <a href={`mailto:${profile.email}`} className="icon" aria-label="Email">
-                <FontAwesomeIcon icon={faEnvelope} />
+              <a href={`mailto:${profile.email}`} className="icon">
+                <FontAwesomeIcon className='icon-i' icon={faEnvelope} />
               </a>
             )}
           </div>
         </div>
       </motion.div>
-
-      <div className="main__action">
-        <a className="main__scroll" href="#about" aria-label="Scroll Down">
-          <div className="main__scroll-box"></div>
-        </a>
-        <p className="scrl">Scroll</p>
-      </div>
     </>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

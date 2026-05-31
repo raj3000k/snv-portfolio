@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import "../../CSS/navbar.css";
+import "../../CSS/resume.css";
+import { motion } from "framer-motion"
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
@@ -50,13 +52,6 @@ function Navbar({ profile }) {
             Projects
           </a>
         </li>
-        {profile?.skills?.length > 0 && (
-          <li className="nav__item">
-            <a href="/#achievements" className="nav__link" onClick={() => setActive("nav__menu")}>
-              Achievements
-            </a>
-          </li>
-        )}
         <li className="nav__item">
           <a href="/#contact" className="nav__link" onClick={() => setActive("nav__menu")}>
             Contact
@@ -66,8 +61,11 @@ function Navbar({ profile }) {
         <li>
           <motion.button
             initial={{ scale: 1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleDownload}
+            whileTap={() => {
+              handleDownload();
+              return { scale: 1.4 };
+            }}
+            transition={{ type: 'spring', stiffness: 125 }}
             className="button"
           >
             <span>Resume</span>
