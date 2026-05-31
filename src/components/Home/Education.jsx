@@ -1,19 +1,22 @@
-import React from 'react'
-import '../../CSS/education.css'
-import EducationCardContainer from './EducationCardContainer'
-import { motion } from "framer-motion"
-const Education = () => {
-  return (
-    <div className="timeline-header-container">
-        <motion.h1 
-        initial={{opacity:0}}
-        whileInView={{opacity:1}}
-        transition={{duration:1,delay:0.05}}
-        viewport={{once:true}}
-        className='education-header'>Education</motion.h1>
-        <EducationCardContainer/>
-    </div>
-  )
-}
+import React from 'react';
+import EducationCardContainer from './EducationCardContainer';
+import { motion } from 'framer-motion';
 
-export default Education
+const Education = ({ educations }) => {
+  return (
+    <div className="timeline-header-container" id="education">
+      <motion.h1
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="education-header"
+      >
+        Education History
+      </motion.h1>
+      <EducationCardContainer educations={educations} />
+    </div>
+  );
+};
+
+export default Education;

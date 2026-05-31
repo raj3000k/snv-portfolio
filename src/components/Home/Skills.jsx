@@ -1,14 +1,14 @@
-import React from 'react'
-import SkillsHeader from './SkillsHeader'
-import SkillsImages from './SkillsImages'
+import React from 'react';
+import SkillsHeader from './SkillsHeader';
+import SkillsImages from './SkillsImages';
 
-const Skills = () => {
+const Skills = ({ skills }) => {
   return (
-    <div className='skills' id='skills'>
-        <SkillsHeader/>
-        <SkillsImages/>
+    <div className="skills" id="skills">
+      <SkillsHeader />
+      <SkillsImages skills={skills} />
     </div>
-  )
-}
+  );
+};
 
-export default Skills
+export default Skills;

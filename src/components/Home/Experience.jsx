@@ -1,20 +1,22 @@
-import React from 'react'
-import '../../CSS/experience.css'
-import { motion } from "framer-motion"
-import ExperienceCardContainer from './ExperienceCardContainer'
+import React from 'react';
+import { motion } from 'framer-motion';
+import ExperienceCardContainer from './ExperienceCardContainer';
 
-const Experience = () => {
+const Experience = ({ experiences }) => {
   return (
-    <div className="timeline-header-container">
-        <motion.h1 
-        initial={{opacity:0}}
-        whileInView={{opacity:1}}
-        transition={{duration:1,delay:0.05}}
-        viewport={{once:true}}
-        className='education-header'>Experience</motion.h1>
-        <ExperienceCardContainer/>
+    <div className="timeline-header-container" id="experience">
+      <motion.h1
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="education-header"
+      >
+        Work Experience
+      </motion.h1>
+      <ExperienceCardContainer experiences={experiences} />
     </div>
-  )
-}
+  );
+};
 
-export default Experience
+export default Experience;

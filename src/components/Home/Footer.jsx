@@ -1,31 +1,29 @@
-import React from 'react'
-import '../../CSS/footer.css'
-import Contact from './Contact'
-import SocialShare from './SocialShare'
+import React from 'react';
+import Contact from './Contact';
+import SocialShare from './SocialShare';
 import { TypeAnimation } from 'react-type-animation';
-const Footer = () => {
+
+const Footer = ({ profile }) => {
   return (
     <>
-    <div className="contact" id='contact'>
-       <TypeAnimation
-      sequence={[
-        
-        "Contact Me...",
-        1000,
-        '',
-        1000
-
-
-      ]}
-      wrapper="h1"
-      speed={10}
-      repeat={Infinity}
-    />
-    <Contact/>
+      <div className="contact" id="contact">
+        <TypeAnimation
+          sequence={[
+            "Contact Me...",
+            1500,
+            "Let's Build Something Special...",
+            1500,
+          ]}
+          wrapper="h1"
+          speed={10}
+          className="proj-head"
+          repeat={Infinity}
+        />
+        <Contact />
       </div>
-    <SocialShare/>
+      <SocialShare profile={profile} />
     </>
-  )    
-}
+  );
+};
 
-export default Footer
+export default Footer;

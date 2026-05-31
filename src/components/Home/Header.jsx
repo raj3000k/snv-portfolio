@@ -1,81 +1,84 @@
-import React from 'react'
-import ProfilePic from '../../assets/images/profilepic.png'
-import '../../CSS/scroll-icon.css'
+import React from 'react';
+import ProfilePicDefault from '../../assets/images/profilepic.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram,faLinkedinIn ,faGithub,faXTwitter} from '@fortawesome/free-brands-svg-icons';
+import { faLinkedinIn, faGithub, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { TypeAnimation } from 'react-type-animation';
-import { motion, spring } from "framer-motion"
-const Header = () => {
+import { motion } from 'framer-motion';
+
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+const Header = ({ profile }) => {
+  const name = profile?.name || "Raj";
+  const title = profile?.title || "Software Developer";
+  
+  const profilePic = profile?.profilePicUrl
+    ? (profile.profilePicUrl.startsWith('/uploads') ? `${API_BASE}${profile.profilePicUrl}` : profile.profilePicUrl)
+    : ProfilePicDefault;
+
   return (
     <>
-    <motion.div id='home'
-    initial={{scale:.55}}
-    animate = {{scale:1}}
-    transition={{duration:1,type:"spring",stiffness:70}}
-    viewport={{once:true}}
-    className="header-container">
-
+      <motion.div
+        id="home"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="header-container"
+      >
         <div className="profile-photo">
-            <img src={ProfilePic} alt="" srcset=""/>
+          <img src={profilePic} alt={name} />
         </div>
 
         <div className="text-heading">
+          <TypeAnimation
+            sequence={[
+              `I'm ${name}`,
+              1500,
+              `I'm a ${title}`,
+              1500,
+              profile?.availability ? "Available for Collaboration!" : "Open to New Projects!",
+              1500,
+            ]}
+            wrapper="h2"
+            speed={10}
+            className="main-heading"
+            repeat={Infinity}
+            key={name + title} // Force re-render if updated
+          />
 
-        <TypeAnimation
-      sequence={[
-        
-        "I'm Raj",
-        1000,
-        
-        "I'm a Software Developer",
-        1000,
-        "B.Tech Student from NIT RR",
-        1000,
-        
-      ]}
-      wrapper="h2"
-      speed={10}
-      className='main-heading'
-      repeat={Infinity}
-      />
-            <div className="social-links">
-                {/* <a href="https://instagram.com//" target = "_blank" className="icon">
-                <FontAwesomeIcon className='icon-i' icon={faInstagram} />
-                </a> */}
-                <a href="https://github.com/raj3000k/" target = "_blank" className="icon">
-                <FontAwesomeIcon className='icon-i' icon={faGithub} />
-                </a>
-                <a href="https://www.linkedin.com/in/raj-motwani-978143204/" className="icon" target = "_blank">
-                    <FontAwesomeIcon className='icon-i' icon={faLinkedinIn} />
-                </a>
-                <a href="https://x.com/RAJMOTWANI16" target = "_blank" className="icon">
-                <FontAwesomeIcon className='icon-i' icon={faXTwitter} />
-                </a>
-                <a href="mailto:rajmotwani38@gmail.com" className="icon" target = "_blank">
-                <FontAwesomeIcon className='icon-i' icon={faEnvelope} />
-                </a>
-            </div>
-
+          <div className="social-links">
+            {profile?.github && (
+              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="icon" aria-label="GitHub">
+                <FontAwesomeIcon icon={faGithub} />
+              </a>
+            )}
+            {profile?.linkedin && (
+              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="icon" aria-label="LinkedIn">
+                <FontAwesomeIcon icon={faLinkedinIn} />
+              </a>
+            )}
+            {profile?.twitter && (
+              <a href={profile.twitter} target="_blank" rel="noopener noreferrer" className="icon" aria-label="Twitter">
+                <FontAwesomeIcon icon={faXTwitter} />
+              </a>
+            )}
+            {profile?.email && (
+              <a href={`mailto:${profile.email}`} className="icon" aria-label="Email">
+                <FontAwesomeIcon icon={faEnvelope} />
+              </a>
+            )}
+          </div>
         </div>
-    </motion.div>
-    <div className="main__action">
-    <a className="main__scroll" href="#">
-      <div className="main__scroll-box">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M11.9997 13.1716L7.04996     8.22186L5.63574 9.63607L11.9997 16L18.3637 9.63607L16.9495 8.22186L11.9997 13.1716Z" fill="rgba(28,28,30,1)">
-            </path>
-            
-        </svg>
-        
-      </div>
-    </a>
-    <p className='scrl'> Scroll </p>
-    
-  </div>
-  </>
-  )
-}
+      </motion.div>
 
-export default Header
+      <div className="main__action">
+        <a className="main__scroll" href="#about" aria-label="Scroll Down">
+          <div className="main__scroll-box"></div>
+        </a>
+        <p className="scrl">Scroll</p>
+      </div>
+    </>
+  );
+};
+
+export default Header;
