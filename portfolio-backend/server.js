@@ -8,6 +8,7 @@ import authRoutes from './routes/auth.js';
 import portfolioRoutes from './routes/portfolio.js';
 import adminRoutes from './routes/admin.js';
 import User from './models/User.js';
+import https from 'https';
 
 dotenv.config();
 
@@ -60,6 +61,23 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: err.message || 'Internal Server Error' });
 });
+
+// Self-ping to prevent Render free tier from sleeping
+const pingSelf = () => {
+  const url = process.env.RENDER_EXTERNAL_URL;
+  if (!url) return;
+
+  console.log(`Setting up keep-awake self-ping for: ${url}`);
+  // Ping every 14 minutes (14 * 60 * 1000 ms)
+  setInterval(() => {
+    https.get(url, (res) => {
+      console.log(`Self-ping keep-awake response: ${res.statusCode}`);
+    }).on('error', (err) => {
+      console.error('Self-ping keep-awake error:', err.message);
+    });
+  }, 14 * 60 * 1000);
+};
+pingSelf();
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
